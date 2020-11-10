@@ -1,0 +1,5 @@
+URL= https://www.ndtv.com/
+BROWSER=chrome
+URI=api.openweathermap.org
+XAPIKEY=7fe67bf08c80ded756e598d6f8fedaea
+CURRENTWEATHER=/data/2.5/weather

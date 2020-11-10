@@ -1,0 +1,6 @@
+package com.TestVagrant.NDTV.Utiities;
+
+public class AppConstants {
+	public final static String CONFIG_FILE = "config.properties";
+	public final static String API_KEY ="x-api-key";
+}

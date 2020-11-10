@@ -1,0 +1,7 @@
+package com.TestVagrant.NDTV.Tests;
+
+import com.TestVagrant.NDTV.Core.BaseAPI;
+
+public class Phase2 extends BaseAPI {
+
+}

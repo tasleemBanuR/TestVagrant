@@ -1,0 +1,28 @@
+package com.TestVagrant.NDTV.Tests;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.testng.annotations.Test;
+
+import com.TestVagrant.NDTV.Core.BaseTest;
+import com.TestVagrant.NDTV.Pages.API;
+import com.TestVagrant.NDTV.Pages.Navigate;
+import com.TestVagrant.NDTV.Utiities.AppConstants;
+
+public class Phase3 extends BaseTest  
+{
+
+	@Test(description = "Validating phase 3 Scenario", enabled = true)
+	public void phase_1_Test() throws InterruptedException {
+		Navigate nav = new Navigate();
+		API api=new API();
+		nav.navigateToWether();
+		String Web = nav.humidity();
+		given().header(AppConstants.API_KEY, HEADER).param("q", "Ajmer").log().all().when()
+		.get(utils.getConfigPropertyValues("ENDPOINT")).then().assertThat()
+	    .statusCode(200)
+	    .body("main.humidity", equalTo(humidity));
+	}
+
+}

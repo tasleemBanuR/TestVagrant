@@ -1,0 +1,45 @@
+package com.TestVagrant.NDTV.Utiities;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Excel {
+	private static XSSFSheet ExcelWSheet;
+
+	private static XSSFWorkbook ExcelWBook;
+
+	private static XSSFCell Cell;
+
+	private static XSSFRow Row;
+
+	private static CreationHelper createHelper;
+
+	public static void setExcelFile(String path, String sheetName) throws Exception {
+
+		try {
+
+			FileInputStream ExcelFile = new FileInputStream(path);
+
+			// Access the required test data sheet
+
+			ExcelWBook = new XSSFWorkbook(ExcelFile);
+
+			ExcelWSheet = ExcelWBook.getSheet(sheetName);
+
+		} catch (Exception e) {
+
+			throw (e);
+
+		}
+
+	}
+
+}

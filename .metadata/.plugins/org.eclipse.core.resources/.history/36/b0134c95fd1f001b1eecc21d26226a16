@@ -1,0 +1,29 @@
+package com.TestVagrant.NDTV.Utiities;
+
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+
+import com.TestVagrant.NDTV.Core.DriverControl;
+
+public class Utils extends DriverControl {
+	private static PropertyFileReader utils = null;
+	private static Properties props = null;
+	public String getConfigPropertyValues(String propertyName) {
+		utils = new PropertyFileReader();
+		try {
+			props = utils.getAllProperties(AppConstants.CONFIG_FILE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String propertyValue = props.getProperty(propertyName);
+		return propertyValue;
+	}
+
+	public void implicitWait(long seconds) {
+		driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
+	}
+
+
+}

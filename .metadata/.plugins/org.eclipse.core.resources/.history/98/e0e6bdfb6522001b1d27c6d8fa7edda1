@@ -1,0 +1,24 @@
+package com.TestVagrant.NDTV.Utiities;
+
+public class WriteExcel {
+	
+	public static XSSFSheet createExcelSheet(String sheetName, XSSFWorkbook workbook) {
+		XSSFSheet sheet = null;
+		if (workbook.getNumberOfSheets() != 0) {
+			for (int k = 0; k < workbook.getNumberOfSheets(); k++) {
+				if (workbook.getSheetName(k).equals(sheetName)) {
+					sheet = workbook.getSheet(sheetName);
+				} else {
+					sheet = workbook.createSheet(sheetName);
+				}
+			}
+		} else {
+			// Create new sheet to the workbook if empty
+			sheet = workbook.createSheet(sheetName);
+		}
+
+		return sheet;
+
+	}
+
+}

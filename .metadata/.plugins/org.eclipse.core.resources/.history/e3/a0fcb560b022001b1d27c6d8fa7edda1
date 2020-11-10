@@ -1,0 +1,15 @@
+package com.TestVagrant.NDTV.Pages;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import com.TestVagrant.NDTV.Core.BaseAPI;
+import com.TestVagrant.NDTV.Utiities.AppConstants;
+import com.TestVagrant.NDTV.Utiities.Utils;
+
+public class API extends BaseAPI {
+	Utils utils = new Utils();
+
+
+
+	
+}

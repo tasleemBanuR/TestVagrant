@@ -1,0 +1,25 @@
+package com.TestVagrant.NDTV.Tests;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.testng.annotations.Test;
+
+import com.TestVagrant.NDTV.Core.BaseTest;
+import com.TestVagrant.NDTV.Pages.Navigate;
+import com.TestVagrant.NDTV.Utiities.AppConstants;
+import com.TestVagrant.NDTV.Utiities.Utils;
+
+public class Phase3 extends BaseTest {
+	Utils utils = new Utils();
+
+	@Test(description = "Validating phase 3 Scenario", enabled = true)
+	public void phase_1_Test() throws InterruptedException {
+		Navigate nav = new Navigate();
+		nav.navigateToWether();
+		String Web = nav.humidity();
+		nav.validateThroughAPIhumidity(Web);
+
+	}
+
+}

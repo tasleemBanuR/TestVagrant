@@ -1,0 +1,21 @@
+package com.TestVagrant.NDTV.Tests;
+
+import org.testng.annotations.Test;
+
+import com.TestVagrant.NDTV.Core.BaseAPI;
+import com.TestVagrant.NDTV.Utiities.AppConstants;
+import com.TestVagrant.NDTV.Utiities.Utils;
+
+public class Phase2 extends BaseAPI {
+	
+	@Test(priority = 1, description = "Verifying all farmers and Keys", enabled = true)
+	public void getFarmertest() {
+		Utils utils=new Utils();
+		given().header(AppConstants.API_KEY, HEADER).log().all().when().get(utils.getConfigPropertyValues("CURRENTWEATHER")).then()
+				.assertThat().log().all().statusCode(200).contentType(ContentType.JSON);
+		System.out.println();
+
+	}
+
+
+}

@@ -1,0 +1,7 @@
+package com.TestVagrant.NDTV.Tests;
+
+import com.TestVagrant.NDTV.Core.BaseTest;
+
+public class Phase1Test extends BaseTest {
+
+}

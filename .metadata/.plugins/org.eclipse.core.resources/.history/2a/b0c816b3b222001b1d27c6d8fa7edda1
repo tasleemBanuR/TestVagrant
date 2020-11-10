@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test Vagrant Scenario Testing">
+  <test  name="phase ">
+    <classes>
+      <class name="com.TestVagrant.Tests.DataTest.java"/>
+       </classes>
+    <class name="com.TestVagrant.NDTV.Tests.Phase2Test.java"/>
+        <class name="com.TestVagrant.NDTV.Tests.Phase3Test.java"/>
+            <class name="com.TestVagrant.NDTV.Tests.DataTest.java"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Test Vagrant  Scenario Testing -->

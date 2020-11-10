@@ -1,0 +1,15 @@
+package com.TestVagrant.NDTV.Utiities;
+
+public class PropertyFileReader {
+	private Properties props = null;
+
+	public Properties getAllProperties(String propertyFileName) throws FileNotFoundException, IOException {
+
+		File configFile = new File(System.getProperty("user.dir")+ "/src/test/java/com/cropin/smartfarmplus/webperformance/Utilities/config.properties");
+		props = new Properties();
+		props.load(new FileInputStream(configFile));
+		return props;
+
+	}
+
+}

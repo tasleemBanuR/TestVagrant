@@ -1,0 +1,53 @@
+package com.TestVagrant.NDTV.Core;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
+public class BaseTest {
+	public static WebDriver driver;
+	static Utils utils = new Utils();
+
+	@BeforeSuite
+	public void start() {
+		initialize();
+	}
+
+	public WebDriver getDriver() {
+		return driver;
+	}
+
+	public static WebDriver initialize() {
+		String browser = utils.getConfigPropertyValues("BROWSER");
+
+		if (browser.equals("chrome")) {
+			System.setProperty("webdriver.chrome.driver", "./Drivers/" + "chromedriver.exe");
+			driver = new ChromeDriver();
+
+		} else {
+
+			System.setProperty("webdriver.gecko.driver", "./Drivers/" + "geckodriver.exe");
+			driver = new FirefoxDriver();
+
+		}
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		driver.get(utils.getConfigPropertyValues("URL"));
+		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+		return driver;
+	}
+
+	@AfterSuite
+	public void closeAll() {
+		driver.quit();
+	}
+
+}

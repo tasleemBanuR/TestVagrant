@@ -1,0 +1,9 @@
+package com.TestVagrant.NDTV.Core;
+
+public class DriverControlextends BaseTest {
+	public WebDriver driver;
+
+	public DriverControl() {
+		this.driver = super.getDriver();
+	}
+}

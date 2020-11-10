@@ -1,0 +1,22 @@
+package com.TestVagrant.NDTV.Core;
+
+import org.testng.annotations.BeforeSuite;
+
+import com.TestVagrant.NDTV.Utiities.Utils;
+
+import io.restassured.RestAssured;
+
+public class BaseAPI {
+	Utils utils = new Utils();
+	public static String HEADER;
+	public static String ENVIRONMENT;
+
+	@BeforeSuite
+	public void beforeSuite() {
+		RestAssured.baseURI =utils.getConfigPropertyValues("URI");
+		HEADER = utils.getConfigPropertyValues("XAPIKEY");
+		
+
+	}
+
+}

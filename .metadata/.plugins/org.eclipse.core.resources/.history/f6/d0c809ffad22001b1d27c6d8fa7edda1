@@ -1,0 +1,70 @@
+package com.TestVagrant.NDTV.Tests;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Timestamp;
+import java.util.Calendar;
+
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.testng.annotations.Test;
+
+import com.TestVagrant.NDTV.Core.BaseTest;
+import com.TestVagrant.NDTV.Pages.API;
+import com.TestVagrant.NDTV.Pages.Navigate;
+import com.TestVagrant.NDTV.Utiities.Excel;
+import com.TestVagrant.NDTV.Utiities.WriteExcel;
+
+public class DataTest extends BaseTest {
+	XSSFWorkbook workbook = new XSSFWorkbook();
+
+	@Test
+	public void dashboardTime() throws Exception {
+		Navigate nav = new Navigate();
+		XSSFSheet outputSheet = WriteExcel.createExcelSheet("TestSheet", workbook);
+		Calendar cal = Calendar.getInstance();
+		// XSSFSheet sheet = Excel.getSheet("Sheet1");
+		Row row = null;
+		API api = new API();
+
+		Row outputRow = outputSheet.createRow(0);
+
+		outputRow.createCell(0).setCellValue(String.valueOf(nav.excelNavigate()));
+		outputRow.createCell(1).setCellValue(String.valueOf(nav.ValidateThroughAPI()));
+
+		Row header = outputSheet.createRow(0);
+		System.out.println("creating Column Names Now ");
+		header.createCell(0).setCellValue("API");
+		header.createCell(1).setCellValue("WEB");
+
+		System.out.println("creating Column Names Now ");
+		for (int columnIndex = 0; columnIndex <= 9; columnIndex++) {
+			outputSheet.autoSizeColumn(columnIndex);
+		}
+
+		try {
+			System.out.println("Sheet Started Now");
+			String timeStamp = new Timestamp(System.currentTimeMillis()).toString();
+			timeStamp = timeStamp.substring(0, timeStamp.length() - 6).replaceAll(":", "");
+			String fileName = "./OutputFile";
+			String fileStamp = fileName + " " + timeStamp;
+			System.out.println("Sheet Started Now");
+			File newFile = new File(fileStamp + ".xlsx");
+			FileOutputStream out = null;
+			if (newFile.exists()) {
+				out = new FileOutputStream(fileStamp + ".xlsx");
+			} else {
+				out = new FileOutputStream(new File(fileStamp + ".xlsx"));
+
+			}
+			System.out.println("Sheet Started Now");
+			workbook.write(out);
+			out.close();
+			System.out.println("File is created successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

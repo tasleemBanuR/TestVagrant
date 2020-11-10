@@ -1,0 +1,18 @@
+package com.TestVagrant.NDTV.Tests;
+
+import org.testng.annotations.Test;
+
+import com.TestVagrant.NDTV.Core.BaseAPI;
+
+public class Phase2 extends BaseAPI {
+	
+	@Test(priority = 1, description = "Verifying all farmers and Keys", enabled = true)
+	public void getFarmertest() {
+		given().header(AppConstants.API_KEY, HEADER).log().all().when().get(utils.getResource("farmer")).then()
+				.assertThat().log().all().statusCode(200).contentType(ContentType.JSON);
+		System.out.println();
+
+	}
+
+
+}

@@ -1,0 +1,138 @@
+package com.TestVagrant.NDTV.Utiities;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Excel {
+	private static XSSFSheet ExcelWSheet;
+
+	private static XSSFWorkbook ExcelWBook;
+
+	private static XSSFCell Cell;
+
+	private static XSSFRow Row;
+
+	private static CreationHelper createHelper;
+
+	public static void setExcelFile(String path, String sheetName) throws Exception {
+
+		try {
+
+			FileInputStream ExcelFile = new FileInputStream(path);
+
+			// Access the required test data sheet
+
+			ExcelWBook = new XSSFWorkbook(ExcelFile);
+
+			ExcelWSheet = ExcelWBook.getSheet(sheetName);
+
+		} catch (Exception e) {
+
+			throw (e);
+
+		}
+
+	}
+
+	/* Method to get Row Count of the excel */
+
+	public static int getRowCount(String sheetName) {
+
+		try {
+			FileInputStream inputStream = new FileInputStream(
+					new File("C:\\Users\\Cropin\\Desktop\\v2 mobile performance.xlsx"));
+			ExcelWBook = new XSSFWorkbook(inputStream);
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("Unable to get the Sheet Name");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		ExcelWSheet = ExcelWBook.getSheet(sheetName);
+
+		// Find number of rows in excel file
+
+		int rowCount = ExcelWSheet.getLastRowNum() - ExcelWSheet.getFirstRowNum();
+		System.out.println(rowCount);
+		return rowCount;
+	}
+
+	/**
+	 * This method is to read the test data from the Excel cell, in this we are
+	 * passing parameters as Row num and Col num
+	 */
+
+	public static String getCellData(int RowNum, int ColNum) throws Exception {
+		String cellData;
+		try {
+
+			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+
+			try {
+				cellData = String.valueOf((long) Cell.getNumericCellValue());
+			} catch (Exception e) {
+				cellData = Cell.getStringCellValue();
+			}
+
+			return cellData;
+
+		} catch (Exception e) {
+
+			return "";
+
+		}
+
+	}
+
+	public static String getCompanyData(int RowNum, int ColNum) throws Exception {
+		String cellData;
+		try {
+
+			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+
+			try {
+				cellData = String.valueOf((long) Cell.getNumericCellValue());
+			} catch (Exception e) {
+				cellData = Cell.getStringCellValue();
+			}
+
+			return cellData;
+
+		} catch (Exception e) {
+
+			return "";
+
+		}
+
+	}
+
+	public static XSSFSheet getSheet(String sheet) {
+
+		try {
+
+			FileInputStream inputStream = new FileInputStream(
+					new File("com.TestVagrant.NDTV\\InputFile"));
+
+			ExcelWBook = new XSSFWorkbook(inputStream);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		ExcelWSheet = ExcelWBook.getSheet(sheet);
+		return ExcelWSheet;
+	}
+
+}

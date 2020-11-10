@@ -1,0 +1,18 @@
+package com.TestVagrant.NDTV.Tests;
+
+import org.testng.annotations.Test;
+
+import com.TestVagrant.NDTV.Pages.Navigate;
+
+public class Phase3 {
+
+	@Test(description="Validating phase 3 Scenario", enabled=true)
+	public void phase_1_Test() throws InterruptedException
+	{
+		Navigate nav= new Navigate();
+		nav.navigateToWether();
+		String Web=nav.humidity();
+	}
+	
+
+}

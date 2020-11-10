@@ -1,0 +1,76 @@
+package com.TestVagrant.NDTV.Pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import com.TestVagrant.NDTV.Core.DriverControl;
+import com.TestVagrant.NDTV.Utiities.Utils;
+
+public class Navigate extends DriverControl {
+
+	PageObjects landingScreen;
+	Utils utils;
+	Actions action = new Actions(driver); 
+	WebDriverWait wait =new WebDriverWait(driver,7000);
+	
+	public Navigate() {
+		super();
+		landingScreen = new PageObjects();
+		PageFactory.initElements(driver, landingScreen);
+		utils = new Utils();
+	}
+
+	public void navigateToWether() throws InterruptedException {
+		landingScreen.moreButton.click();
+		landingScreen.weatherButton.click();
+		utils.implicitWait(2000);
+		selectCity();
+		
+	}
+
+	public void selectCity() throws InterruptedException
+	{
+		wait.until(ExpectedConditions.visibilityOfElementLocated(
+				By.xpath("//div[@class='cityText' and contains(text(),'New Delhi')]");
+		landingScreen.searchBox.clear();
+		landingScreen.searchBox.sendKeys("Ajmer");
+		landingScreen.searchBox.sendKeys(Keys.ENTER);
+		landingScreen.cityName.click();
+		utils.implicitWait(5000);
+		Assert.assertEquals(true, landingScreen.cityTitleOnMap.isDisplayed(),
+				" city is not available on the map with temperature information");
+		landingScreen.cityTitleOnMap.click();
+		landingScreen.weatherDetails.isDisplayed();
+		landingScreen.weatherDetails.getText();
+		
+	}
+	class PageObjects {
+		@FindBy(xpath = "//a[@id='h_sub_menu']")
+		WebElement moreButton;
+
+		@FindBy(xpath = "//a[@href='https://social.ndtv.com/static/Weather/report/?pfrom=home-topsubnavigation']")
+		WebElement weatherButton;
+
+		@FindBy(xpath = "//input[@id='searchBox']")
+		WebElement searchBox;
+		
+        @CacheLookup
+		@FindBy(xpath = "//input[@id='Ajmer']")
+		WebElement cityName;
+
+		@FindBy(xpath = "//div[@title='Ajmer']")
+		WebElement cityTitleOnMap;
+
+		@FindBy(xpath = "//div[@class='leaflet-popup-content-wrapper']")
+		WebElement weatherDetails;
+
+	}
+}

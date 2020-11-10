@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="External API Testing">
+<listeners>
+<listener class-name="extentreportListener.ExtentManager" />
+</listeners>
+  <test  name="GET Farmer API Test">
+    <classes>
+      <class name="com.cropin.externalAPI.Get.Test.GetFarmerTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- External API Testing -->

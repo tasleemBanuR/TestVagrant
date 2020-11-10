@@ -1,0 +1,27 @@
+package com.TestVagrant.NDTV.Pages;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import com.TestVagrant.NDTV.Core.BaseAPI;
+import com.TestVagrant.NDTV.Utiities.AppConstants;
+import com.TestVagrant.NDTV.Utiities.Utils;
+
+public class API  extends BaseAPI{
+	Utils utils =new Utils();
+	
+	public void validateAPI(String humidity)
+	{
+	given().header(AppConstants.API_KEY, HEADER).param("q", "Ajmer").log().all().when()
+	.get(utils.getConfigPropertyValues("ENDPOINT")).then().assertThat()
+    .statusCode(200)
+    .body("main.humidity", equalTo(humidity));
+	}
+	public String validateAPIReturnResponse(String humidity)
+	{
+	String responseString =given().header(AppConstants.API_KEY,  utils.getConfigPropertyValues("XAPIKEY")).param("q", "Ajmer").log().all().when()
+			.get(utils.getConfigPropertyValues("ENDPOINT")).then().assertThat()
+		    .statusCode(200)
+		    .body("main.humidity", equalTo(humidity)).toString();
+	return responseString;
+	}
+}

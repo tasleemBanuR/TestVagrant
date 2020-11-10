@@ -1,0 +1,16 @@
+package com.TestVagrant.NDTV.Pages;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
+import com.TestVagrant.NDTV.Utiities.AppConstants;
+
+public class API {
+	
+	given().header(AppConstants.API_KEY, HEADER).param("q", "Ajmer").log().all().when()
+	.get(utils.getConfigPropertyValues("ENDPOINT")).then().assertThat()
+    .statusCode(200)
+    .body("id", equalTo(testMovie.getId()))
+    .body("name", equalTo(testMovie.getName()))
+    .body("synopsis", notNullValue());
+
+}
